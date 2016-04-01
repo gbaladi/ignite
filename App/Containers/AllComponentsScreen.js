@@ -1,5 +1,5 @@
 // An All Components Screen is a great way to dev and quick-test components
-import React, { View, ScrollView, Text, TouchableOpacity, PropTypes } from 'react-native'
+import React, { View, ScrollView, Text, TouchableOpacity, PropTypes, Image } from 'react-native'
 import { connect } from 'react-redux'
 import styles from '../Styles/AllComponentsScreenStyle'
 import ProgressiveImage from '../Components/ProgressiveImage'
@@ -9,6 +9,7 @@ import Routes from '../Navigation/Routes'
 // external libs
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Animatable from 'react-native-animatable'
+import Lightbox from 'react-native-lightbox'
 
 export default class AllComponentsScreen extends React.Component {
 
@@ -68,6 +69,13 @@ export default class AllComponentsScreen extends React.Component {
     const { loggedIn, temperature, city } = this.props
     return (
       <ScrollView style={styles.screenContainer}>
+        <Text style={styles.componentLabel}>RN Lightbox</Text>
+        <Lightbox navigator={this.props.navigator}>
+          <Image
+            style={{ height: 300 }}
+            source={{ uri: 'http://knittingisawesome.com/wp-content/uploads/2012/12/cat-wearing-a-reindeer-hat1.jpg' }}
+          />
+        </Lightbox>
         <Text style={styles.componentLabel}>Login/Logout Redux + Sagas Example</Text>
         {loggedIn ? this.renderLogoutButton() : this.renderLoginButton()}
         <Text style={styles.componentLabel}>Progressive Image Component</Text>
@@ -100,6 +108,8 @@ export default class AllComponentsScreen extends React.Component {
             <Icon name='cab' size={Metrics.icons.medium} />
           </Animatable.View>
         </View>
+
+
       </ScrollView>
     )
   }
